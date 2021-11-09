@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:28:36 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/09 15:09:42 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/11/09 18:06:15 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*ft_add_buffer(int fd, char *buffer)
 		if (tete < 0)
 		{
 			free (add);
+			free (buffer);
 			return (NULL);
 		}
 		add[tete] = '\0';
@@ -101,7 +102,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 255 ||BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
 		buffer = ft_strdup("");
