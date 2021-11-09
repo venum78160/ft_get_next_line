@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:28:36 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/05 16:44:14 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:09:42 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,28 @@ char	*ft_add_buffer(int fd, char *buffer)
 	return (buffer);
 }
 
+char	*new_line(char *buffer)
+{
+	int		newbuf;
+	char	*line;
+
+	if (buffer == NULL)
+		return (NULL);
+	if (ft_strchr(buffer, '\n') == NULL)
+		newbuf = 0;
+	else
+		newbuf = ft_strlen(ft_strchr(buffer, '\n')) - 1;
+	line = malloc(sizeof(char) * (ft_strlen(buffer) - newbuf) + 1);
+	if (!line)
+		return (NULL);
+	ft_strlcpy(line, buffer, (ft_strlen(buffer) - newbuf) + 1);
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
-	int			newbuf;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -91,13 +108,7 @@ char	*get_next_line(int fd)
 	buffer = ft_add_buffer(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	if (!ft_strchr(buffer, '\n'))
-		return (buffer);
-	newbuf = ft_strlen(ft_strchr(buffer, '\n')) - 1;
-	line = malloc(sizeof(char) * (ft_strlen(buffer) - newbuf) + 1);
-	if (!line)
-		return (NULL);
-	ft_strlcpy(line, buffer, (ft_strlen(buffer) - newbuf) + 1);
+	line = new_line(buffer);
 	buffer = ft_reset_buffer(buffer, ft_strlen(line));
 	if (line[0] == '\0')
 	{
@@ -111,17 +122,17 @@ char	*get_next_line(int fd)
 // int main()
 // {
 // 	int	fd;
-// 	fd = open("test", O_RDWR );
-// 	if (fd == -1)
+// 	char *tmp;
+
+// 	fd = open("test", O_RDONLY);
+// 	tmp = get_next_line(fd);
+// 	while (tmp != NULL)
 // 	{
-// 		printf("open failed\n");
-// 		printf("%s\n",strerror(errno));
-// 		return (1);
+// 		printf("%s", tmp);
+// 		free(tmp);
+// 		tmp = get_next_line(fd);
 // 	}
-// 	printf("fd = %i\n", fd);
-// 	printf("ligne fichier texte = %s",get_next_line(fd));
-// 	printf("ligne fichier texte = %s",get_next_line(fd));
-// 	printf("ligne fichier texte = %s",get_next_line(fd));
+// 	printf("\nfin du programme\n");
 // 	if (close(fd) == -1)
 // 	{
 // 		printf("close failed\n");
