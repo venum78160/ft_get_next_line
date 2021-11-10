@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:28:36 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/09 18:06:15 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:07:29 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,29 +115,8 @@ char	*get_next_line(int fd)
 	{
 		free (line);
 		free (buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	return (line);
 }
-
-// int main()
-// {
-// 	int	fd;
-// 	char *tmp;
-
-// 	fd = open("test", O_RDONLY);
-// 	tmp = get_next_line(fd);
-// 	while (tmp != NULL)
-// 	{
-// 		printf("%s", tmp);
-// 		free(tmp);
-// 		tmp = get_next_line(fd);
-// 	}
-// 	printf("\nfin du programme\n");
-// 	if (close(fd) == -1)
-// 	{
-// 		printf("close failed\n");
-// 		return (1);
-// 	}
-// 	return (0);
-// }

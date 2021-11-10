@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 16:09:39 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/05 16:27:39 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:08:00 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <stdio.h> // a enlever !!!!!!
-# include <string.h> // a enlever !!!!!
-# include <errno.h> // a enlever !!!!!!
 
 //prototype
 char	*get_next_line(int fd);
